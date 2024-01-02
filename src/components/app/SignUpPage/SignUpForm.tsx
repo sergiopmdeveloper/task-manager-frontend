@@ -4,6 +4,9 @@ import { FormWrapper } from '@/components/app/Auth/FormWrapper'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { SignUpSchema, type SignUpSchemaType } from '@/validation/signUp'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { SubmitHandler, useForm } from 'react-hook-form'
 
 /**
  * Renders the sign up form.
@@ -11,9 +14,22 @@ import { Label } from '@/components/ui/label'
  * @returns The rendered sign up form.
  */
 export function SignUpForm() {
+  const { register, handleSubmit } = useForm<SignUpSchemaType>({
+    resolver: zodResolver(SignUpSchema),
+  })
+
+  /**
+   * Handles the form submission for the sign up form.
+   *
+   * @param data - The form data submitted by the user.
+   */
+  const onSubmit: SubmitHandler<SignUpSchemaType> = data => {
+    console.log(data)
+  }
+
   return (
     <FormContainer formTitle="Sign Up">
-      <FormWrapper>
+      <FormWrapper onSubmit={handleSubmit(onSubmit)}>
         <Field>
           <Label htmlFor="name">Name</Label>
           <Input
@@ -21,6 +37,7 @@ export function SignUpForm() {
             type="text"
             placeholder="Your name..."
             autoComplete="Name"
+            {...register('name')}
           />
         </Field>
         <Field>
@@ -30,6 +47,7 @@ export function SignUpForm() {
             type="text"
             placeholder="Your email..."
             autoComplete="Email"
+            {...register('email')}
           />
         </Field>
         <Field>
@@ -39,6 +57,7 @@ export function SignUpForm() {
             type="password"
             placeholder="Your password..."
             autoComplete="Password"
+            {...register('password')}
           />
         </Field>
         <Button type="submit">Submit</Button>

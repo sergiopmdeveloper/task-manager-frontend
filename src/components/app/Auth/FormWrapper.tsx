@@ -1,10 +1,18 @@
+import { HTMLProps } from 'react'
+
 /**
  * Wraps the form content with a container element.
  *
- * @param {React.ReactNode} children - The content to be wrapped.
+ * @param {React.PropsWithChildren<HTMLProps<HTMLFormElement>>} props - The props for the form element and its children.
  *
  * @returns The form element with the wrapped content.
  */
-export function FormWrapper({ children }: { children: React.ReactNode }) {
-  return <form className="flex flex-col gap-6">{children}</form>
+export function FormWrapper(
+  props: React.PropsWithChildren<HTMLProps<HTMLFormElement>>
+) {
+  return (
+    <form {...props} className="flex flex-col gap-6">
+      {props.children}
+    </form>
+  )
 }
