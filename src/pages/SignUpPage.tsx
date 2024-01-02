@@ -1,3 +1,9 @@
+import { SignUpForm } from '@/components/app/SignUpPage/SignUpForm'
+
 export function SignUpPage() {
-  return <h1>Sign up page</h1>
+  return (
+    <div className="w-screen h-screen flex items-center justify-center">
+      <SignUpForm />
+    </div>
+  )
 }
