@@ -1,4 +1,5 @@
 import { Field } from '@/components/app/Auth/Field'
+import { FieldError } from '@/components/app/Auth/FieldError'
 import { FormContainer } from '@/components/app/Auth/FormContainer'
 import { FormWrapper } from '@/components/app/Auth/FormWrapper'
 import { Button } from '@/components/ui/button'
@@ -14,7 +15,11 @@ import { SubmitHandler, useForm } from 'react-hook-form'
  * @returns The rendered sign up form.
  */
 export function SignUpForm() {
-  const { register, handleSubmit } = useForm<SignUpSchemaType>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignUpSchemaType>({
     resolver: zodResolver(SignUpSchema),
   })
 
@@ -36,9 +41,10 @@ export function SignUpForm() {
             id="name"
             type="text"
             placeholder="Your name..."
-            autoComplete="Name"
+            autoComplete="username"
             {...register('name')}
           />
+          {errors.name && <FieldError>{errors.name.message}</FieldError>}
         </Field>
         <Field>
           <Label htmlFor="email">Email</Label>
@@ -46,9 +52,10 @@ export function SignUpForm() {
             id="email"
             type="text"
             placeholder="Your email..."
-            autoComplete="Email"
+            autoComplete="email"
             {...register('email')}
           />
+          {errors.email && <FieldError>{errors.email.message}</FieldError>}
         </Field>
         <Field>
           <Label htmlFor="password">Password</Label>
@@ -56,9 +63,12 @@ export function SignUpForm() {
             id="password"
             type="password"
             placeholder="Your password..."
-            autoComplete="Password"
+            autoComplete="current-password"
             {...register('password')}
           />
+          {errors.password && (
+            <FieldError>{errors.password.message}</FieldError>
+          )}
         </Field>
         <Button type="submit">Submit</Button>
       </FormWrapper>
