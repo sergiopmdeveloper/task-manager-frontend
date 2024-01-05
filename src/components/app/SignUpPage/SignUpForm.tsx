@@ -41,7 +41,7 @@ export function SignUpForm() {
   return (
     <FormContainer formTitle="Sign Up">
       {statusCode === 409 && <FormError>User already exists</FormError>}
-      {statusCode !== 409 && <FormError>Unexpected error</FormError>}
+      {statusCode === 500 && <FormError>Unexpected error</FormError>}
       <FormWrapper onSubmit={handleSubmit(onSubmit)}>
         <Field>
           <Label htmlFor="name">Name</Label>

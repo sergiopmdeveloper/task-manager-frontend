@@ -37,6 +37,7 @@ export function signUp(data: SignUpSchemaType) {
       if (error instanceof EmailAlreadyExistsError) {
         console.error('Email already exists')
       } else {
+        setStatusCode(500)
         console.error('Unexpected error occurred')
       }
     })
