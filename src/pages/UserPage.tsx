@@ -1,5 +1,8 @@
+import { Button } from '@/components/ui/button'
 import { useAuth } from '@/hooks/useAuth'
 import { useValidateUserUrl } from '@/hooks/useValidateUserUrl'
+import { signOut } from '@/utils/signOut'
+import { useNavigate } from 'react-router-dom'
 
 /**
  * Renders the UserPage component.
@@ -7,8 +10,20 @@ import { useValidateUserUrl } from '@/hooks/useValidateUserUrl'
  * @returns The rendered UserPage component.
  */
 export function UserPage() {
+  const navigate = useNavigate()
   const user = { ...useAuth() }
   useValidateUserUrl()
 
-  return <h1>{user.name}</h1>
+  if (Object.keys(user).length > 0) {
+    return (
+      <>
+        <div className="container h-20 items-center flex justify-between">
+          <h1 className="text-xl font-semibold">Welcome {user.name}</h1>
+          <Button variant="destructive" onClick={() => signOut(navigate)}>
+            Logout
+          </Button>
+        </div>
+      </>
+    )
+  }
 }
