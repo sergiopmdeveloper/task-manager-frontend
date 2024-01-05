@@ -16,7 +16,7 @@ type FormContainerProps = {
  */
 export function FormContainer({ formTitle, children }: FormContainerProps) {
   return (
-    <div className="w-[30rem] bg-secondary p-5 mx-5">
+    <div className="w-[30rem] bg-secondary p-5 mx-5 relative">
       <h1 className="text-3xl font-semibold mb-8">{formTitle}</h1>
       {children}
     </div>
