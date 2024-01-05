@@ -1,5 +1,6 @@
 import { useSignUp } from '@/stores/useSignUp'
 import { type SignUpSchemaType } from '@/validation/signUp'
+import { type NavigateFunction } from 'react-router-dom'
 
 class EmailAlreadyExistsError extends Error {
   constructor() {
@@ -12,8 +13,9 @@ class EmailAlreadyExistsError extends Error {
  * Signs up a user with the provided data.
  *
  * @param {SignUpSchemaType} data - The data for the sign-up process.
+ * @param {NavigateFunction} navigate - The function to navigate to a new page.
  */
-export function signUp(data: SignUpSchemaType) {
+export function signUp(data: SignUpSchemaType, navigate: NavigateFunction) {
   const { setSending, setStatusCode } = useSignUp.getState()
 
   setSending(true)
@@ -30,7 +32,13 @@ export function signUp(data: SignUpSchemaType) {
       if (statusCode === 409) {
         throw new EmailAlreadyExistsError()
       } else {
-        // Implement session logic
+        response.json().then(data => {
+          const { name, email, access_token } = data
+          localStorage.setItem('name', name)
+          localStorage.setItem('email', email)
+          localStorage.setItem('access_token', access_token)
+          navigate(`/user/${name.toLowerCase()}`)
+        })
       }
     })
     .catch(error => {

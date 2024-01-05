@@ -12,6 +12,7 @@ import { SignUpSchema, type SignUpSchemaType } from '@/validation/signUp'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { LoaderIcon } from 'lucide-react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
 /**
  * Renders the sign up form.
@@ -20,6 +21,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
  */
 export function SignUpForm() {
   const { sending, statusCode } = useSignUp()
+  const navigate = useNavigate()
 
   const {
     register,
@@ -35,7 +37,7 @@ export function SignUpForm() {
    * @param data - The form data submitted by the user.
    */
   const onSubmit: SubmitHandler<SignUpSchemaType> = data => {
-    signUp(data)
+    signUp(data, navigate)
   }
 
   return (
