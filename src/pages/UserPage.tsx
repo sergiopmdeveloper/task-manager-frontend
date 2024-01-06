@@ -25,7 +25,7 @@ export function UserPage() {
     }
   }, [userIsLoading, user, navigate])
 
-  if (Object.keys(user).length > 0) {
+  if (!userIsLoading && Object.keys(user).length > 0) {
     return (
       <div className="container h-20 items-center flex justify-between">
         <h1 className="text-xl font-semibold">Welcome {user.name}</h1>
