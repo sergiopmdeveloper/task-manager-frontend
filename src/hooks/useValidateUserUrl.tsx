@@ -1,18 +1,22 @@
 import { useEffect } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 /**
  * Custom hook to validate the user URL.
  */
 export function useValidateUserUrl() {
-  const { user: urlUserName } = useParams()
   const navigate = useNavigate()
 
   useEffect(() => {
-    const validUserName = localStorage.getItem('name')?.toLowerCase()
+    const pathArray = window.location.pathname.split('/')
+    const urlUserName = pathArray.length > 2 ? pathArray[2] : null
 
-    if (validUserName !== urlUserName) {
-      navigate(`/user/${validUserName}`)
+    if (urlUserName) {
+      const validUserName = localStorage.getItem('name')?.toLowerCase()
+
+      if (validUserName !== urlUserName) {
+        navigate(`/user/${validUserName}`)
+      }
     }
-  }, [urlUserName, navigate])
+  }, [navigate])
 }

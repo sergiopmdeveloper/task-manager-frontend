@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom'
 /**
  * Custom hook for managing authentication state.
  * Retrieves authentication data from local storage and sets it in state.
- * If no authentication data is found, it navigates to the sign-up page.
  *
  * @returns The authentication data as a record of key-value pairs.
  */
@@ -21,10 +20,6 @@ export function useAuth() {
       if (key !== null) {
         authData[key] = localStorage.getItem(key)
       }
-    }
-
-    if (Object.keys(authData).length === 0) {
-      navigate('/sign-up')
     }
 
     setAuth(authData)
