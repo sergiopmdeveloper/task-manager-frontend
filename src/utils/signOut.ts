@@ -10,7 +10,7 @@ import { NavigateFunction } from 'react-router-dom'
  */
 export function signOut(navigate: NavigateFunction) {
   localStorage.clear()
-  navigate('/sign-up')
+  navigate('/sign-in')
   useSignUp.getState().reset()
   useSignIn.getState().reset()
 }
