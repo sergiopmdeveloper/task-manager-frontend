@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button'
 import { useAuth } from '@/hooks/useAuth'
 import { useValidateUserUrl } from '@/hooks/useValidateUserUrl'
 import { signOut } from '@/utils/signOut'
+import { validateSession } from '@/utils/validateSession'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -25,12 +26,12 @@ export function UserPage() {
   }, [user])
 
   useEffect(() => {
-    if (!userIsLoading && Object.keys(user).length === 0) {
+    if (!userIsLoading && !validateSession(user)) {
       navigate('/sign-up')
     }
   }, [userIsLoading, user, navigate])
 
-  if (!userIsLoading && Object.keys(user).length > 0) {
+  if (!userIsLoading && validateSession(user)) {
     return (
       <div className="container h-20 items-center flex justify-between">
         <h1 className="text-xl font-semibold">Welcome {user.name}</h1>

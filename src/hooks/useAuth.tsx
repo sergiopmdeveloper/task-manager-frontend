@@ -1,6 +1,14 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+export type AuthData = {
+  name: string | null
+  email: string | null
+  access_token: string | null
+}
+
+const AUTH_KEYS = ['name', 'email', 'access_token']
+
 /**
  * Custom hook for managing authentication state.
  * Retrieves authentication data from local storage and sets it in state.
@@ -8,18 +16,19 @@ import { useNavigate } from 'react-router-dom'
  * @returns The authentication data as a record of key-value pairs.
  */
 export function useAuth() {
-  const [auth, setAuth] = useState<Record<string, string | null>>({})
+  const [auth, setAuth] = useState<AuthData>({
+    name: null,
+    email: null,
+    access_token: null,
+  })
+
   const navigate = useNavigate()
 
   useEffect(() => {
-    const authData: Record<string, string | null> = {}
+    const authData: AuthData = { name: null, email: null, access_token: null }
 
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i)
-
-      if (key !== null) {
-        authData[key] = localStorage.getItem(key)
-      }
+    for (const key of AUTH_KEYS) {
+      authData[key as keyof AuthData] = localStorage.getItem(key)
     }
 
     setAuth(authData)

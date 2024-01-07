@@ -1,5 +1,6 @@
 import { SignUpForm } from '@/components/app/SignUpPage/SignUpForm'
 import { useAuth } from '@/hooks/useAuth'
+import { validateSession } from '@/utils/validateSession'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -21,12 +22,12 @@ export function SignUpPage() {
   }, [user])
 
   useEffect(() => {
-    if (!userIsLoading && Object.keys(user).length > 0) {
+    if (!userIsLoading && validateSession(user)) {
       navigate(`/user/${user.name?.toLowerCase()}`)
     }
   }, [userIsLoading, user, navigate])
 
-  if (!userIsLoading && Object.keys(user).length === 0) {
+  if (!userIsLoading && !validateSession(user)) {
     return (
       <div className="w-screen h-screen flex items-center justify-center">
         <SignUpForm />
