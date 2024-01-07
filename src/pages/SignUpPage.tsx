@@ -1,3 +1,4 @@
+import { PageWrapper } from '@/components/app/Auth/PageWrapper'
 import { SignUpForm } from '@/components/app/SignUpPage/SignUpForm'
 import { useAuth } from '@/hooks/useAuth'
 import { validateSession } from '@/utils/validateSession'
@@ -29,9 +30,9 @@ export function SignUpPage() {
 
   if (!userIsLoading && !validateSession(user)) {
     return (
-      <div className="w-screen h-screen flex items-center justify-center">
+      <PageWrapper>
         <SignUpForm />
-      </div>
+      </PageWrapper>
     )
   }
 }

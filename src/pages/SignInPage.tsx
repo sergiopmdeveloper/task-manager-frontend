@@ -1,4 +1,5 @@
 import { SignInForm } from '@/components/app/SignInPage/SignInForm'
+import { PageWrapper } from '@/components/app/Auth/PageWrapper'
 
 /**
  * Renders the sign-in page.
@@ -7,8 +8,8 @@ import { SignInForm } from '@/components/app/SignInPage/SignInForm'
  */
 export function SignInPage() {
   return (
-    <div className="w-screen h-screen flex items-center justify-center">
+    <PageWrapper>
       <SignInForm />
-    </div>
+    </PageWrapper>
   )
 }
