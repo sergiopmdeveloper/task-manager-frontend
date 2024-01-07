@@ -5,6 +5,11 @@ import { signOut } from '@/utils/signOut'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+/**
+ * Renders the UserPage component.
+ *
+ * @returns The rendered UserPage component.
+ */
 export function UserPage() {
   const navigate = useNavigate()
 
