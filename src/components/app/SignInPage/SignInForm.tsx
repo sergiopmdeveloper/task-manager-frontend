@@ -3,6 +3,7 @@ import { FieldError } from '@/components/app/Auth/FieldError'
 import { FormContainer } from '@/components/app/Auth/FormContainer'
 import { FormError } from '@/components/app/Auth/FormError'
 import { FormWrapper } from '@/components/app/Auth/FormWrapper'
+import { Suggestion } from '@/components/app/Auth/Suggestion'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -69,6 +70,7 @@ export function SignInForm() {
             <FieldError>{errors.password.message}</FieldError>
           )}
         </Field>
+        <Suggestion page="sign-in" />
         <Button disabled={sending} type="submit">
           {sending ? 'Sending' : 'Send'}
           {sending && <LoaderIcon className="animate-spin ml-1.5" size={20} />}
