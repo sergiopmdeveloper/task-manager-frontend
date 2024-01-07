@@ -1,0 +1,8 @@
+# UI components
+src/components/ui
+
+# Prettier ignore
+.prettierignore
+
+# ESLint ignore
+.eslintignore
