@@ -1,4 +1,5 @@
 import { useSignUp } from '@/stores/useSignUp'
+import { useSignIn } from '@/stores/useSignIn'
 import { NavigateFunction } from 'react-router-dom'
 
 /**
@@ -8,9 +9,8 @@ import { NavigateFunction } from 'react-router-dom'
  * @param {NavigateFunction} navigate - The function used for navigation.
  */
 export function signOut(navigate: NavigateFunction) {
-  const { reset } = useSignUp.getState()
-
   localStorage.clear()
-  navigate('/sign-up')
-  reset()
+  navigate('/sign-in')
+  useSignUp.getState().reset()
+  useSignIn.getState().reset()
 }

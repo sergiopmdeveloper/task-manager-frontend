@@ -7,56 +7,45 @@ import { Suggestion } from '@/components/app/Auth/Suggestion'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { signUp } from '@/services/signUp'
-import { useSignUp } from '@/stores/useSignUp'
-import { SignUpSchema, type SignUpSchemaType } from '@/validation/signUp'
+import { signIn } from '@/services/signIn'
+import { useSignIn } from '@/stores/useSignIn'
+import { SignInSchema, type SignInSchemaType } from '@/validation/signIn'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { LoaderIcon } from 'lucide-react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 /**
- * Renders the sign up form.
+ * Renders the sign in form.
  *
- * @returns The rendered sign up form.
+ * @returns The rendered sign in form.
  */
-export function SignUpForm() {
-  const { sending, statusCode } = useSignUp()
+export function SignInForm() {
+  const { sending, statusCode } = useSignIn()
   const navigate = useNavigate()
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignUpSchemaType>({
-    resolver: zodResolver(SignUpSchema),
+  } = useForm<SignInSchemaType>({
+    resolver: zodResolver(SignInSchema),
   })
 
   /**
-   * Handles the form submission for the sign up form.
+   * Handles the form submission for the sign in form.
    *
    * @param data - The form data submitted by the user.
    */
-  const onSubmit: SubmitHandler<SignUpSchemaType> = data => {
-    signUp(data, navigate)
+  const onSubmit: SubmitHandler<SignInSchemaType> = data => {
+    signIn(data, navigate)
   }
 
   return (
-    <FormContainer formTitle="Sign Up">
-      {statusCode === 409 && <FormError>User already exists</FormError>}
+    <FormContainer formTitle="Sign In">
+      {statusCode === 401 && <FormError>Wrong credentials</FormError>}
       {statusCode === 500 && <FormError>Unexpected error</FormError>}
       <FormWrapper onSubmit={handleSubmit(onSubmit)}>
-        <Field>
-          <Label htmlFor="name">Name</Label>
-          <Input
-            id="name"
-            type="text"
-            placeholder="Your name..."
-            autoComplete="username"
-            {...register('name')}
-          />
-          {errors.name && <FieldError>{errors.name.message}</FieldError>}
-        </Field>
         <Field>
           <Label htmlFor="email">Email</Label>
           <Input
@@ -81,7 +70,7 @@ export function SignUpForm() {
             <FieldError>{errors.password.message}</FieldError>
           )}
         </Field>
-        <Suggestion page="sign-up" />
+        <Suggestion page="sign-in" />
         <Button disabled={sending} type="submit">
           {sending ? 'Sending' : 'Send'}
           {sending && <LoaderIcon className="animate-spin ml-1.5" size={20} />}

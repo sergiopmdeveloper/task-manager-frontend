@@ -27,7 +27,7 @@ export function UserPage() {
 
   useEffect(() => {
     if (!userIsLoading && !validateSession(user)) {
-      navigate('/sign-up')
+      navigate('/sign-in')
     }
   }, [userIsLoading, user, navigate])
 
