@@ -1,9 +1,10 @@
 import { PageWrapper } from '@/components/app/Auth/PageWrapper'
+import { BottomMessage } from '@/components/app/Global/BottomMessage'
 import { SignInForm } from '@/components/app/SignInPage/SignInForm'
 import { useAuth } from '@/hooks/useAuth'
 import { validateSession } from '@/utils/validateSession'
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 /**
  * Renders the sign-in page.
@@ -11,8 +12,12 @@ import { useNavigate } from 'react-router-dom'
  * @returns The sign-in page component.
  */
 export function SignInPage() {
+  const location = useLocation()
+  const expired = location.state?.expired
+
   const user = useAuth()
   const [userIsLoading, setUserIsLoading] = useState(true)
+  const [showExpiredMessage, setShowExpiredMessage] = useState(false)
 
   const navigate = useNavigate()
 
@@ -25,14 +30,20 @@ export function SignInPage() {
   useEffect(() => {
     if (!userIsLoading && validateSession(user)) {
       navigate(`/user/${user.name?.toLowerCase()}`)
+    } else if (!userIsLoading && !validateSession(user) && expired) {
+      setShowExpiredMessage(true)
+      setTimeout(() => setShowExpiredMessage(false), 5000)
     }
-  }, [userIsLoading, user, navigate])
+  }, [userIsLoading, user, navigate, expired])
 
   if (!userIsLoading && !validateSession(user)) {
     return (
-      <PageWrapper>
-        <SignInForm />
-      </PageWrapper>
+      <>
+        <PageWrapper>
+          <SignInForm />
+        </PageWrapper>
+        {showExpiredMessage && <BottomMessage>Session expired</BottomMessage>}
+      </>
     )
   }
 }
