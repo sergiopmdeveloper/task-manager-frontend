@@ -42,7 +42,9 @@ export function SignInPage() {
         <PageWrapper>
           <SignInForm />
         </PageWrapper>
-        {showExpiredMessage && <BottomMessage>Session expired</BottomMessage>}
+        {showExpiredMessage && (
+          <BottomMessage type="error">Session expired</BottomMessage>
+        )}
       </>
     )
   }
