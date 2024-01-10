@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { useAuth } from '@/hooks/useAuth'
 import { useValidateUserUrl } from '@/hooks/useValidateUserUrl'
+import { verifyToken } from '@/services/verifyToken'
 import { signOut } from '@/utils/signOut'
 import { validateSession } from '@/utils/validateSession'
 import { useEffect, useState } from 'react'
@@ -28,6 +29,8 @@ export function UserPage() {
   useEffect(() => {
     if (!userIsLoading && !validateSession(user)) {
       navigate('/sign-in')
+    } else if (!userIsLoading) {
+      verifyToken(user?.access_token, navigate)
     }
   }, [userIsLoading, user, navigate])
 
