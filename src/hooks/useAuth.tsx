@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 export type AuthData = {
-  name: string | null
-  email: string | null
-  access_token: string | null
+  name: string
+  email: string
+  access_token: string
 }
 
 const AUTH_KEYS = ['name', 'email', 'access_token']
@@ -17,18 +17,20 @@ const AUTH_KEYS = ['name', 'email', 'access_token']
  */
 export function useAuth() {
   const [auth, setAuth] = useState<AuthData>({
-    name: null,
-    email: null,
-    access_token: null,
+    name: '',
+    email: '',
+    access_token: '',
   })
 
   const navigate = useNavigate()
 
   useEffect(() => {
-    const authData: AuthData = { name: null, email: null, access_token: null }
+    const authData: AuthData = { name: '', email: '', access_token: '' }
 
     for (const key of AUTH_KEYS) {
-      authData[key as keyof AuthData] = localStorage.getItem(key)
+      let item = localStorage.getItem(key)
+      item = !item ? '' : item
+      authData[key as keyof AuthData] = item
     }
 
     setAuth(authData)

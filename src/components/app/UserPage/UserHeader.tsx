@@ -5,10 +5,10 @@ import { useNavigate } from 'react-router-dom'
 /**
  * Renders the header component for the user page.
  *
- * @param {string | null} name - The name of the user.
+ * @param {string} name - The name of the user.
  * @returns The rendered header component.
  */
-export function UserHeader({ name }: { name: string | null }) {
+export function UserHeader({ name }: { name: string }) {
   const navigate = useNavigate()
 
   return (

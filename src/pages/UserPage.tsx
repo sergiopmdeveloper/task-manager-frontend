@@ -36,7 +36,7 @@ export function UserPage() {
   if (!userIsLoading && validateSession(user)) {
     return (
       <>
-        <UserHeader name={user!.name} />
+        <UserHeader name={user.name} />
       </>
     )
   }
