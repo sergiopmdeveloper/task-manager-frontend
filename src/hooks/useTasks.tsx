@@ -2,7 +2,7 @@ import { signOut } from '@/utils/signOut'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-type Task = {
+export type Task = {
   title: string
   description: string
   status: string

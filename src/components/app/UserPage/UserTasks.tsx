@@ -1,5 +1,6 @@
 import type { AuthData } from '@/hooks/useAuth'
 import { useTasks } from '@/hooks/useTasks'
+import { UserTask } from '@/components/app/UserPage/UserTask'
 
 /**
  * Renders the user tasks component.
@@ -14,11 +15,11 @@ export function UserTasks({ email, access_token }: Omit<AuthData, 'name'>) {
 
   if (tasks.length > 0) {
     return (
-      <>
+      <div className="container flex flex-col gap-5">
         {tasks.map((task, key) => (
-          <h1 key={key}>{task.title}</h1>
+          <UserTask key={key} {...task} />
         ))}
-      </>
+      </div>
     )
   } else {
     return <p>Loading...</p>
