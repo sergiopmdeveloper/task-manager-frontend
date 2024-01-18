@@ -1,4 +1,5 @@
 import { UserHeader } from '@/components/app/UserPage/UserHeader'
+import { UserTasks } from '@/components/app/UserPage/UserTasks'
 import { useAuth } from '@/hooks/useAuth'
 import { useValidateUserUrl } from '@/hooks/useValidateUserUrl'
 import { verifyToken } from '@/services/verifyToken'
@@ -37,6 +38,7 @@ export function UserPage() {
     return (
       <>
         <UserHeader name={user.name} />
+        <UserTasks email={user.email} access_token={user.access_token} />
       </>
     )
   }
