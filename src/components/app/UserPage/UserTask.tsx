@@ -15,10 +15,11 @@ export function UserTask({ title, description, priority, deadline }: Task) {
     'bg-blue-500': priority === 'Low',
   })
 
-  const formattedDeadline = `${deadline.substring(0, 4)}-${deadline.substring(
-    4,
-    6
-  )}-${deadline.substring(6, 8)}`
+  const formattedDeadline = new Date(deadline).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
 
   return (
     <div className="relative flex flex-col gap-4 bg-secondary p-5 rounded">
