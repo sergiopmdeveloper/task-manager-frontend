@@ -6,6 +6,11 @@ import { cn } from '@/lib/utils'
  * Renders a user task component.
  *
  * @param {Task} props - The task object.
+ * @param {string} props.title - The task title.
+ * @param {string} props.description - The task description.
+ * @param {string} props.priority - The task priority.
+ * @param {string} props.deadline - The task deadline.
+ *
  * @returns The rendered user task component.
  */
 export function UserTask({ title, description, priority, deadline }: Task) {
