@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-interface SignUpState {
+type SignUpState = {
   sending: boolean
   statusCode: number | null
   setSending: (sending: boolean) => void
