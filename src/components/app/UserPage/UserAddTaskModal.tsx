@@ -6,11 +6,10 @@ import {
 import { Plus } from 'lucide-react'
 
 /**
- * Renders a modal component for adding a task.
- *
- * @returns The rendered AddTaskModal component.
+ * Add task modal component of the user page.
+ * @returns The component.
  */
-export function AddTaskModal() {
+export function UserAddTaskModal() {
   return (
     <Popover>
       <PopoverTrigger>

@@ -3,11 +3,9 @@ import { signOut } from '@/utils/signOut'
 import { useNavigate } from 'react-router-dom'
 
 /**
- * Renders the header component for the user page.
- *
+ * Header component of the user page.
  * @param {string} name - The name of the user.
- *
- * @returns The rendered header component.
+ * @returns The component.
  */
 export function UserHeader({ name }: { name: string }) {
   const navigate = useNavigate()

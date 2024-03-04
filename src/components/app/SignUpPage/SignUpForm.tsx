@@ -1,9 +1,9 @@
-import { Field } from '@/components/app/Auth/Field'
-import { FieldError } from '@/components/app/Auth/FieldError'
-import { FormContainer } from '@/components/app/Auth/FormContainer'
-import { FormError } from '@/components/app/Auth/FormError'
-import { FormWrapper } from '@/components/app/Auth/FormWrapper'
-import { Suggestion } from '@/components/app/Auth/Suggestion'
+import { AuthField } from '@/components/app/AuthPage/AuthField'
+import { AuthFieldError } from '@/components/app/AuthPage/AuthFieldError'
+import { AuthFormContainer } from '@/components/app/AuthPage/AuthFormContainer'
+import { AuthFormError } from '@/components/app/AuthPage/AuthFormError'
+import { AuthFormSuggestion } from '@/components/app/AuthPage/AuthFormSuggestion'
+import { AuthFormWrapper } from '@/components/app/AuthPage/AuthFormWrapper'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -16,9 +16,8 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 /**
- * Renders the sign up form.
- *
- * @returns The rendered sign up form.
+ * Sign-up form component of the sign-up page.
+ * @returns The component.
  */
 export function SignUpForm() {
   const { sending, statusCode } = useSignUp()
@@ -42,11 +41,11 @@ export function SignUpForm() {
   }
 
   return (
-    <FormContainer formTitle="Sign Up">
-      {statusCode === 409 && <FormError>User already exists</FormError>}
-      {statusCode === 500 && <FormError>Unexpected error</FormError>}
-      <FormWrapper onSubmit={handleSubmit(onSubmit)}>
-        <Field>
+    <AuthFormContainer formTitle="Sign Up">
+      {statusCode === 409 && <AuthFormError>User already exists</AuthFormError>}
+      {statusCode === 500 && <AuthFormError>Unexpected error</AuthFormError>}
+      <AuthFormWrapper onSubmit={handleSubmit(onSubmit)}>
+        <AuthField>
           <Label htmlFor="name">Name</Label>
           <Input
             id="name"
@@ -55,9 +54,11 @@ export function SignUpForm() {
             autoComplete="username"
             {...register('name')}
           />
-          {errors.name && <FieldError>{errors.name.message}</FieldError>}
-        </Field>
-        <Field>
+          {errors.name && (
+            <AuthFieldError>{errors.name.message}</AuthFieldError>
+          )}
+        </AuthField>
+        <AuthField>
           <Label htmlFor="email">Email</Label>
           <Input
             id="email"
@@ -66,9 +67,11 @@ export function SignUpForm() {
             autoComplete="email"
             {...register('email')}
           />
-          {errors.email && <FieldError>{errors.email.message}</FieldError>}
-        </Field>
-        <Field>
+          {errors.email && (
+            <AuthFieldError>{errors.email.message}</AuthFieldError>
+          )}
+        </AuthField>
+        <AuthField>
           <Label htmlFor="password">Password</Label>
           <Input
             id="password"
@@ -78,15 +81,15 @@ export function SignUpForm() {
             {...register('password')}
           />
           {errors.password && (
-            <FieldError>{errors.password.message}</FieldError>
+            <AuthFieldError>{errors.password.message}</AuthFieldError>
           )}
-        </Field>
-        <Suggestion page="sign-up" />
+        </AuthField>
+        <AuthFormSuggestion page="sign-up" />
         <Button disabled={sending} type="submit">
           {sending ? 'Sending' : 'Send'}
           {sending && <LoaderIcon className="animate-spin ml-1.5" size={20} />}
         </Button>
-      </FormWrapper>
-    </FormContainer>
+      </AuthFormWrapper>
+    </AuthFormContainer>
   )
 }

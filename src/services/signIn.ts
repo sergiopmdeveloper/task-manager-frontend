@@ -2,6 +2,8 @@ import { useSignIn } from '@/stores/useSignIn'
 import { type SignInSchemaType } from '@/validation/signIn'
 import { type NavigateFunction } from 'react-router-dom'
 
+// Custom exceptions
+
 class WrongCredentials extends Error {
   constructor() {
     super('Wrong credentials')
@@ -10,8 +12,7 @@ class WrongCredentials extends Error {
 }
 
 /**
- * Signs in a user with the provided data.
- *
+ * Sign in a user.
  * @param {SignInSchemaType} data - The data for the sign-in process.
  * @param {NavigateFunction} navigate - The function to navigate to a new page.
  */

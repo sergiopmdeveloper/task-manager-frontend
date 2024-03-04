@@ -2,8 +2,7 @@ import { signOut } from '@/utils/signOut'
 import { type NavigateFunction } from 'react-router-dom'
 
 /**
- * Verifies the given token by making a POST request to the API endpoint.
- *
+ * Verify session token.
  * @param {string} token - The token to be verified.
  * @param {NavigateFunction} navigate - The function used for navigation.
  */

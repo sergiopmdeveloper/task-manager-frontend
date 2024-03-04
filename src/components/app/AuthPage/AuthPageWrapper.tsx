@@ -1,11 +1,9 @@
 /**
- * Wraps the content of an auth page with a centered container.
- *
+ * Page wrapper component of an authentication page.
  * @param {React.ReactNode} children - The content to be wrapped.
- *
- * @returns The wrapped content.
+ * @returns The component.
  */
-export function PageWrapper({ children }: { children: React.ReactNode }) {
+export function AuthPageWrapper({ children }: { children: React.ReactNode }) {
   return (
     <div className="w-screen h-screen flex items-center justify-center">
       {children}

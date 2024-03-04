@@ -2,6 +2,8 @@ import { signOut } from '@/utils/signOut'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+// Types
+
 export type Task = {
   title: string
   description: string
@@ -11,11 +13,9 @@ export type Task = {
 }
 
 /**
- * Custom hook to fetch tasks for a given email and access token.
- *
+ * Custom hook to fetch tasks for a given email.
  * @param {string} email - The email of the user.
  * @param {string} access_token - The access token for authentication.
- *
  * @returns {Task[]} An array of tasks.
  */
 export function useTasks(email: string, access_token: string): Task[] {

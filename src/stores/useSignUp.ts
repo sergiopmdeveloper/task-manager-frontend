@@ -1,5 +1,7 @@
 import { create } from 'zustand'
 
+// Types
+
 type SignUpState = {
   sending: boolean
   statusCode: number | null
@@ -7,6 +9,8 @@ type SignUpState = {
   setStatusCode: (statusCode: number | null) => void
   reset: () => void
 }
+
+// Stores
 
 export const useSignUp = create<SignUpState>()(set => ({
   sending: false,

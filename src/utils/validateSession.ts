@@ -1,10 +1,8 @@
 import { type AuthData } from '@/hooks/useAuth'
 
 /**
- * Validates a session object.
- *
+ * Validate user session.
  * @param {AuthData} session - The session object to validate.
- *
  * @returns True if the session is valid, false otherwise.
  */
 export function validateSession(session: AuthData): boolean {

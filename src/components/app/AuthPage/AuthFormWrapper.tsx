@@ -1,13 +1,11 @@
 import { HTMLProps } from 'react'
 
 /**
- * Wraps the form content with a container element.
- *
+ * Form wrapper component of an authentication page.
  * @param {React.PropsWithChildren<HTMLProps<HTMLFormElement>>} props - The props for the form element and its children.
- *
- * @returns The form element with the wrapped content.
+ * @returns The component.
  */
-export function FormWrapper(
+export function AuthFormWrapper(
   props: React.PropsWithChildren<HTMLProps<HTMLFormElement>>
 ) {
   return (

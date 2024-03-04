@@ -1,18 +1,18 @@
 import { Link } from 'react-router-dom'
 
+// Types
+
 type SuggestionProps = {
   page: 'sign-up' | 'sign-in'
 }
 
 /**
- * Renders a suggestion component based on the provided page.
- *
+ * Form suggestion component of an authentication page.
  * @param {SuggestionProps} props - The component props.
  * @param {string} props.page - The current page.
- *
- * @returns The rendered suggestion component.
+ * @returns The component.
  */
-export function Suggestion({ page }: SuggestionProps) {
+export function AuthFormSuggestion({ page }: SuggestionProps) {
   const message =
     page === 'sign-up' ? 'Already have an account?' : "Don't have an account?"
   const link = page === 'sign-up' ? 'Sign in' : 'Sign up'

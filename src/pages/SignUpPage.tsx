@@ -1,4 +1,4 @@
-import { PageWrapper } from '@/components/app/Auth/PageWrapper'
+import { AuthPageWrapper } from '@/components/app/AuthPage/AuthPageWrapper'
 import { SignUpForm } from '@/components/app/SignUpPage/SignUpForm'
 import { useAuth } from '@/hooks/useAuth'
 import { validateSession } from '@/utils/validateSession'
@@ -6,9 +6,8 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 /**
- * Renders the sign-up page.
- *
- * @returns The sign-up page component.
+ * Sign-up page component.
+ * @returns The page component.
  */
 export function SignUpPage() {
   const user = useAuth()
@@ -30,9 +29,9 @@ export function SignUpPage() {
 
   if (!userIsLoading && !validateSession(user)) {
     return (
-      <PageWrapper>
+      <AuthPageWrapper>
         <SignUpForm />
-      </PageWrapper>
+      </AuthPageWrapper>
     )
   }
 }

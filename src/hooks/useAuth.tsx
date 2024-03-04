@@ -1,19 +1,21 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+// Types
+
 export type AuthData = {
   name: string
   email: string
   access_token: string
 }
 
+// Constants
+
 const AUTH_KEYS = ['name', 'email', 'access_token']
 
 /**
  * Custom hook for managing authentication state.
- * Retrieves authentication data from local storage and sets it in state.
- *
- * @returns The authentication data as a record of key-value pairs.
+ * @returns The authentication data.
  */
 export function useAuth() {
   const [auth, setAuth] = useState<AuthData>({

@@ -2,6 +2,8 @@ import { useSignUp } from '@/stores/useSignUp'
 import { type SignUpSchemaType } from '@/validation/signUp'
 import { type NavigateFunction } from 'react-router-dom'
 
+// Custom exceptions
+
 class EmailAlreadyExistsError extends Error {
   constructor() {
     super('Email already exists')
@@ -10,8 +12,7 @@ class EmailAlreadyExistsError extends Error {
 }
 
 /**
- * Signs up a user with the provided data.
- *
+ * Sign up a new user.
  * @param {SignUpSchemaType} data - The data for the sign-up process.
  * @param {NavigateFunction} navigate - The function to navigate to a new page.
  */

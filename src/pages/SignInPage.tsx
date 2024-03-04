@@ -1,15 +1,15 @@
-import { PageWrapper } from '@/components/app/Auth/PageWrapper'
-import { BottomMessage } from '@/components/app/Global/BottomMessage'
+import { AuthPageWrapper } from '@/components/app/AuthPage/AuthPageWrapper'
 import { SignInForm } from '@/components/app/SignInPage/SignInForm'
+import { Toaster } from '@/components/ui/toaster'
+import { useToast } from '@/components/ui/use-toast'
 import { useAuth } from '@/hooks/useAuth'
 import { validateSession } from '@/utils/validateSession'
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 /**
- * Renders the sign-in page.
- *
- * @returns The sign-in page component.
+ * Sign-in page component.
+ * @returns The page component.
  */
 export function SignInPage() {
   const location = useLocation()
@@ -17,7 +17,7 @@ export function SignInPage() {
 
   const user = useAuth()
   const [userIsLoading, setUserIsLoading] = useState(true)
-  const [showExpiredMessage, setShowExpiredMessage] = useState(false)
+  const { toast } = useToast()
 
   const navigate = useNavigate()
 
@@ -31,20 +31,17 @@ export function SignInPage() {
     if (!userIsLoading && validateSession(user)) {
       navigate(`/user/${user.name?.toLowerCase()}`)
     } else if (!userIsLoading && !validateSession(user) && expired) {
-      setShowExpiredMessage(true)
-      setTimeout(() => setShowExpiredMessage(false), 5000)
+      toast({ title: 'Session Expired', description: 'Sign in again' })
     }
-  }, [userIsLoading, user, navigate, expired])
+  }, [userIsLoading, user, navigate, expired, toast])
 
   if (!userIsLoading && !validateSession(user)) {
     return (
       <>
-        <PageWrapper>
+        <AuthPageWrapper>
           <SignInForm />
-        </PageWrapper>
-        {showExpiredMessage && (
-          <BottomMessage type="error">Session expired</BottomMessage>
-        )}
+        </AuthPageWrapper>
+        <Toaster />
       </>
     )
   }

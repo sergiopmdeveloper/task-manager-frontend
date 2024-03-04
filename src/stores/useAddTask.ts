@@ -1,5 +1,7 @@
 import { create } from 'zustand'
 
+// Types
+
 type AddTaskState = {
   sending: boolean
   statusCode: number | null
@@ -7,6 +9,8 @@ type AddTaskState = {
   setStatusCode: (statusCode: number | null) => void
   reset: () => void
 }
+
+// Stores
 
 export const useAddTask = create<AddTaskState>()(set => ({
   sending: false,

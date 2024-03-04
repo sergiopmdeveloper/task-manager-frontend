@@ -1,15 +1,14 @@
-import { AddTaskModal } from './AddTaskModal'
+import { UserAddTaskModal } from './UserAddTaskModal'
 
 /**
- * Renders the header component for user tasks.
- *
- * @returns The rendered header component.
+ * Tasks header component of the user page.
+ * @returns The component.
  */
 export function UserTasksHeader() {
   return (
     <div className="container flex justify-between mb-8">
       <h1 className="text-xl font-semibold">Tasks</h1>
-      <AddTaskModal />
+      <UserAddTaskModal />
     </div>
   )
 }

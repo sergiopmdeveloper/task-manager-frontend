@@ -1,25 +1,17 @@
-import { Button } from '@/components/ui/button'
 import { type Task } from '@/hooks/useTasks'
 import { cn } from '@/lib/utils'
+import { Check, Pencil, Trash } from 'lucide-react'
 
 /**
- * Renders a user task component.
- *
+ * Task component of the user page.
  * @param {Task} props - The task object.
  * @param {string} props.title - The task title.
  * @param {string} props.description - The task description.
  * @param {string} props.priority - The task priority.
  * @param {string} props.deadline - The task deadline.
- *
- * @returns The rendered user task component.
+ * @returns The component.
  */
 export function UserTask({ title, description, priority, deadline }: Task) {
-  const priorityClass = cn({
-    'bg-red-500': priority === 'High',
-    'bg-orange-500': priority === 'Medium',
-    'bg-blue-500': priority === 'Low',
-  })
-
   const formattedDeadline = new Date(deadline).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
@@ -31,7 +23,13 @@ export function UserTask({ title, description, priority, deadline }: Task) {
       <h1 className="text-lg font-semibold">{title}</h1>
       <p className="text-sm">{description}</p>
       <div className="absolute top-2 right-2 flex flex-row items-center gap-2">
-        <span className={`text-white p-1 rounded-sm text-xs ${priorityClass}`}>
+        <span
+          className={cn('text-white p-1 rounded-sm text-xs ${priorityClass}', {
+            'bg-red-500': priority === 'High',
+            'bg-orange-500': priority === 'Medium',
+            'bg-blue-500': priority === 'Low',
+          })}
+        >
           {priority}
         </span>
         <span className="p-1 rounded-sm bg-slate-300 text-xs">
@@ -39,9 +37,15 @@ export function UserTask({ title, description, priority, deadline }: Task) {
         </span>
       </div>
       <div className="flex flex-row items-center gap-2">
-        <Button className="bg-green-500 hover:bg-green-400">Finish</Button>
-        <Button className="bg-yellow-500 hover:bg-yellow-400">Edit</Button>
-        <Button className="bg-red-500 hover:bg-red-400">Delete</Button>
+        <div className="bg-green-600 w-8 cursor-pointer hover:brightness-110 rounded h-8 flex items-center justify-center">
+          <Check className="h-4 w-4 stroke-green-300" />
+        </div>
+        <div className="bg-yellow-600 w-8 cursor-pointer hover:brightness-110 rounded h-8 flex items-center justify-center">
+          <Pencil className="h-4 w-4 stroke-yellow-300" />
+        </div>
+        <div className="bg-red-600 w-8 cursor-pointer hover:brightness-110 rounded h-8 flex items-center justify-center">
+          <Trash className="h-4 w-4 stroke-red-300" />
+        </div>
       </div>
     </div>
   )

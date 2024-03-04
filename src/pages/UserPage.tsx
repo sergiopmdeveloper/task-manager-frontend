@@ -9,9 +9,8 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 /**
- * Renders the UserPage component.
- *
- * @returns The rendered UserPage component.
+ * User page component.
+ * @returns The page component.
  */
 export function UserPage() {
   const navigate = useNavigate()

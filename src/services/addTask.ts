@@ -3,6 +3,8 @@ import { useAddTask } from '@/stores/useAddTask'
 import { signOut } from '@/utils/signOut'
 import { type NavigateFunction } from 'react-router-dom'
 
+// Custom exceptions
+
 class TaskAlreadyExists extends Error {
   constructor() {
     super('Task already exists')
@@ -11,8 +13,7 @@ class TaskAlreadyExists extends Error {
 }
 
 /**
- * Adds a task to the server.
- *
+ * Add a task to the user's list of tasks.
  * @param {Task} task - The task to be added.
  * @param {string} email - The email of the user.
  * @param {string} token - The authentication token.
